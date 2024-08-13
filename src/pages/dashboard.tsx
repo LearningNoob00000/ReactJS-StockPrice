@@ -1,14 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import { TopStocks } from './TopStocks';
 import { OverviewChart } from './OverviewChart';
 // Function to fetch data from Alpha Vantage API
@@ -67,7 +58,7 @@ export default function Dashboard() {
         </div>
         
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-          <OverviewChart symbol="IBM" />
+          <OverviewChart/>
           <TopStocks />
         </div>
       </div>
