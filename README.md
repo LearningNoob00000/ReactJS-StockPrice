@@ -8,8 +8,9 @@ To get started with StockMarket Pro, follow these steps:
 
 1. **Clone the Repository**
 
-   ```bash
+  ```bash
 git clone https://github.com/yourusername/stockmarket-pro.git
+```
 Navigate to the Project Directory
 
 ```bash
