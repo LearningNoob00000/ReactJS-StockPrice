@@ -28,7 +28,7 @@ Environment Variables
 Create a .env file in the root directory and add your API keys and configurations:
 
 ```.env
-REACT_APP_TWELVE_DATA_API_KEY=d29e1de2a5364243857ca2a3dcd4dcab
+VITE_STOCK_API_KEY = d29e1de2a5364243857ca2a3dcd4dcab
 ```
 Usage
 Start the development server to run the application:
