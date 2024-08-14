@@ -11,29 +11,36 @@ Clone the Repository
 
 First, clone the repository to your local machine using the following command:
 
-git clone https://github.com/LearningNoob00000/ReactJS-StockPrice.git
+bash
+Copy code
+git clone https://github.com/yourusername/stockmarket-pro.git
 Navigate to the Project Directory
 
 Change into the project directory:
 
-
+bash
+Copy code
 cd stockmarket-pro
 Install Dependencies
 
 Install the necessary dependencies using npm:
 
-
+bash
+Copy code
 npm install
 Environment Variables
 
 Ensure that you have the necessary environment variables set. Create a .env file in the root directory of the project and add your API keys and other configurations. Example:
 
 env
-REACT_APP_TWELVE_DATA_API_KEY=d29e1de2a5364243857ca2a3dcd4dcab
+Copy code
+REACT_APP_TWELVE_DATA_API_KEY=your_api_key_here
 Start the Development Server
 
 To start the application in development mode, use the following command:
 
+bash
+Copy code
 npm start
 This will start the development server and open the application in your default web browser at http://localhost:3000.
 
