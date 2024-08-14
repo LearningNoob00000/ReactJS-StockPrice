@@ -12,7 +12,7 @@ To get started with StockMarket Pro, follow these steps:
    git clone https://github.com/yourusername/stockmarket-pro.git
 Navigate to the Project Directory
 
-bash
+```bash
 Copy code
 cd stockmarket-pro
 Install Dependencies
@@ -20,6 +20,7 @@ Install Dependencies
 Use npm to install the required dependencies:
 
 ```bash
+Copy code
 npm install
 
 Environment Variables
@@ -33,7 +34,7 @@ Usage
 Start the development server to run the application:
 
 ```bash
-
+Copy code
 npm start
 Open http://localhost:3000 in your browser to view the application.
 
