@@ -36,7 +36,7 @@ Start the development server to run the application:
 npm start
 ```
 ```
-Open http://localhost:3000 in your browser to view the application.
+Open http://localhost:5173/ in your browser to view the application.
 ```
 Features
 Landing Page: Displays a welcome message with a "Get Started" button that navigates to the Dashboard.
