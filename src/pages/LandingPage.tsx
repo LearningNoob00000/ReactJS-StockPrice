@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { TextEffect } from '@/components/ui/text-effect';
 import AnimatedBackground from '@/components/ui/AnimatedBackground';
-import { SpinnerLoader } from '@/assets/loader/SpinnderLoader';
+import GraphLoader from '@/assets/loader/GraphLoader';
 export default function LandingPage() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
@@ -18,7 +18,7 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {isLoading && <SpinnerLoader fullScreen />}
+      {isLoading && <GraphLoader/>}
       <main className="flex-grow flex flex-col items-center justify-center p-4">
         <div className="text-center mb-8">
           

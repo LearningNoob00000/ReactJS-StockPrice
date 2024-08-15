@@ -1,45 +1,44 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts';
-import { FetchTwelveData, ParseApiTwelveData } from "@/service/TwelveDataAPI";
 import { TradingLoader } from "@/assets/loader/SimpleLoader";
 import { useTheme } from "@/components/theme-provider";
+import { FetchTwelveData, ParseApiTwelveData } from "@/service/TwelveDataAPI";
+
+const LazyChart = lazy(() => import('./LazyChart'));
 
 export const OverviewChart = ({ currentStock }: { currentStock: string }) => {
   const [chartData, setChartData] = useState<{ timestamp: Date; close: number }[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [lastPrice, setLastPrice] = useState<number | null>(null);
-  const { theme } = useTheme(); // Getting the current theme from ThemeProvider
+  const { theme } = useTheme();
 
   const loadingText = `Loading ${currentStock} data`;
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      const data = await FetchTwelveData(currentStock);
-      if (data && data.status === 'ok') {
-        const parsedData = ParseApiTwelveData(data);
-        setChartData(parsedData);
-        if (parsedData.length > 0) {
-          setLastPrice(parsedData[parsedData.length - 1].close);
+      try {
+        const data = await FetchTwelveData(currentStock);
+        if (data && data.status === 'ok') {
+          const parsedData = ParseApiTwelveData(data);
+          setChartData(parsedData);
+          if (parsedData.length > 0) {
+            setLastPrice(parsedData[parsedData.length - 1].close);
+          }
+        } else {
+          throw new Error("Failed to fetch stock data");
         }
-      } else {
-        setError("Failed to fetch stock data");
+      } catch (err) {
+          setError((err as Error).message);
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     };
 
     fetchData();
   }, [currentStock]);
-
-  const tooltipStyles = {
-    fontSize: '12px',
-    padding: '5px',
-    backgroundColor: theme === 'dark' ? '#333333' : '#ffffff',
-    color: theme === 'dark' ? '#ffffff' : '#000000',
-  };
 
   return (
     <Card className="col-span-4 relative">
@@ -56,47 +55,18 @@ export const OverviewChart = ({ currentStock }: { currentStock: string }) => {
         ) : error ? (
           <div>Error: {error}</div>
         ) : (
-          <>
-            <ResponsiveContainer width="100%" height={350}>
-              <LineChart data={chartData}>
-                <XAxis
-                  dataKey="timestamp"
-                  stroke="#888888"
-                  fontSize={12}
-                  tickLine={false}
-                  axisLine={false}
-                  tickFormatter={(value) => new Date(value).toLocaleTimeString()}
-                />
-                <YAxis
-                  stroke="#888888"
-                  fontSize={12}
-                  tickLine={false}
-                  axisLine={false}
-                  tickFormatter={(value) => `$${(value as number).toFixed(2)}`}
-                />
-                <Tooltip
-                  labelFormatter={(label) => `Timestamp: ${new Date(label).toLocaleString()}`}
-                  formatter={(value: number) => [`$${value.toFixed(2)}`, "Close"]}
-                  contentStyle={tooltipStyles}
-                />
-                <Line
-                  type="monotone"
-                  dataKey="close"
-                  stroke="#8884d8"
-                  dot={false}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-            {lastPrice !== null && (
-              <div className="mt-4 flex justify-end">
-                <Badge variant="outline" className="text-lg">
-                  <div className="items-center">
-                    Last Price: ${lastPrice.toFixed(2)}
-                  </div>
-                </Badge>
+          <Suspense fallback={<div>Loading chart...</div>}>
+            <LazyChart chartData={chartData} theme={theme} />
+          </Suspense>
+        )}
+        {lastPrice !== null && (
+          <div className="mt-4 flex justify-end">
+            <Badge variant="outline" className="text-lg">
+              <div className="items-center">
+                Last Price: ${lastPrice.toFixed(2)}
               </div>
-            )}
-          </>
+            </Badge>
+          </div>
         )}
       </CardContent>
     </Card>
