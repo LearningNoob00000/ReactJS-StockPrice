@@ -54,17 +54,3 @@ export const StockEarning = async (symbol: Symbol) => {
   }
 };
 
-export const StockProfile = async (symbol: Symbol) => {
-  const params = {
-    symbol: symbol,
-  };
-
-  try {
-    // Verify if 'profile' method is correct or replace with a valid method
-    const data = await client.profile(params);
-    return data;
-  } catch (error) {
-    console.error("Error fetching stock profile from TwelveData API:", error);
-    return null;
-  }
-};
