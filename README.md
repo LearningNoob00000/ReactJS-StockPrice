@@ -1,5 +1,7 @@
 # StockMarket Pro
 
+vercel: https://react-js-stock-price.vercel.app/
+
 StockMarket Pro is a web application designed to provide real-time stock data, advanced analytics, and portfolio management tools.
 
 ## Installation
@@ -9,7 +11,7 @@ To get started with StockMarket Pro, follow these steps:
 1. **Clone the Repository**
 
   ```bash
-git clone https://github.com/yourusername/stockmarket-pro.git
+git clone https://github.com/LearningNoob00000/ReactJS-StockPrice.git
 ```
 Navigate to the Project Directory
 
