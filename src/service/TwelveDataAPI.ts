@@ -1,6 +1,9 @@
 import { STOCK_API_KEY } from "@/lib/utils";
 import twelvedata from "twelvedata";
 
+// Define the type for the stock symbol
+type Symbol = string;
+
 const config = {
   key: STOCK_API_KEY,
 };
@@ -8,7 +11,7 @@ const config = {
 const client = twelvedata(config);
 
 // Function to fetch stock data using TwelveData API
-export const FetchTwelveData = async (symbol) => {
+export const FetchTwelveData = async (symbol: Symbol) => {
   const params = {
     symbol: symbol,
     interval: "1day",
@@ -24,17 +27,20 @@ export const FetchTwelveData = async (symbol) => {
   }
 };
 
+// Define the type for the API response
+interface ApiResponse {
+  values: Array<{ datetime: string; close: string }>;
+}
+
 // Parsing function for the API response to format data for the chart
-export const ParseApiTwelveData = (apiResponse) => {
-  const { values } = apiResponse;
-  return values.map((item) => ({
+export const ParseApiTwelveData = (apiResponse: ApiResponse) => {
+  return apiResponse.values.map((item) => ({
     timestamp: new Date(item.datetime),
     close: parseFloat(item.close),
   }));
 };
 
-
-export const StockEarning =  async (symbol)  => {
+export const StockEarning = async (symbol: Symbol) => {
   const params = {
     symbol: symbol,
   };
@@ -43,20 +49,22 @@ export const StockEarning =  async (symbol)  => {
     const data = await client.earnings(params);
     return data;
   } catch (error) {
-    console.error("Error fetching EODPrice from TwelveData API:", error);
+    console.error("Error fetching earnings from TwelveData API:", error);
     return null;
   }
 };
-export const StockProfile =  async (symbol)  => {
+
+export const StockProfile = async (symbol: Symbol) => {
   const params = {
     symbol: symbol,
   };
 
   try {
+    // Verify if 'profile' method is correct or replace with a valid method
     const data = await client.profile(params);
     return data;
   } catch (error) {
-    console.error("Error fetching EODPrice from TwelveData API:", error);
+    console.error("Error fetching stock profile from TwelveData API:", error);
     return null;
   }
 };

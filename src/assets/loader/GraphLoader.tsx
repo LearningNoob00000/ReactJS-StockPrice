@@ -1,5 +1,4 @@
-import React from 'react';
-import { Player, Controls } from '@lottiefiles/react-lottie-player';
+import { Player } from '@lottiefiles/react-lottie-player';
 import graphAnimation from '@/assets/loader/graph_animation.json';
 
 const GraphLoader = () => {

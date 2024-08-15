@@ -7,10 +7,10 @@ import { TradingLoader } from "@/assets/loader/SimpleLoader";
 import { useTheme } from "@/components/theme-provider";
 
 export const OverviewChart = ({ currentStock }: { currentStock: string }) => {
-  const [chartData, setChartData] = useState([]);
+  const [chartData, setChartData] = useState<{ timestamp: Date; close: number }[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
-  const [lastPrice, setLastPrice] = useState(null);
+  const [lastPrice, setLastPrice] = useState<number | null>(null);
   const { theme } = useTheme(); // Getting the current theme from ThemeProvider
 
   const loadingText = `Loading ${currentStock} data`;
@@ -72,11 +72,11 @@ export const OverviewChart = ({ currentStock }: { currentStock: string }) => {
                   fontSize={12}
                   tickLine={false}
                   axisLine={false}
-                  tickFormatter={(value) => `$${value.toFixed(2)}`}
+                  tickFormatter={(value) => `$${(value as number).toFixed(2)}`}
                 />
                 <Tooltip
                   labelFormatter={(label) => `Timestamp: ${new Date(label).toLocaleString()}`}
-                  formatter={(value) => [`$${value.toFixed(2)}`, "Close"]}
+                  formatter={(value: number) => [`$${value.toFixed(2)}`, "Close"]}
                   contentStyle={tooltipStyles}
                 />
                 <Line
@@ -87,16 +87,15 @@ export const OverviewChart = ({ currentStock }: { currentStock: string }) => {
                 />
               </LineChart>
             </ResponsiveContainer>
-                {lastPrice && (
-        <div className="mt-4 flex justify-end">
-          <Badge variant="outline" className="text-lg">
-            <div className="items-center">
-              Last Price: ${lastPrice.toFixed(2)}
-            </div>
-          </Badge>
-        </div>
-      )}
-
+            {lastPrice !== null && (
+              <div className="mt-4 flex justify-end">
+                <Badge variant="outline" className="text-lg">
+                  <div className="items-center">
+                    Last Price: ${lastPrice.toFixed(2)}
+                  </div>
+                </Badge>
+              </div>
+            )}
           </>
         )}
       </CardContent>

@@ -1,3 +1,5 @@
+import { StockProfileData } from "@/types/interface";
+
 // Mock stock profile data
 export const StockProfileMockData: StockProfileData[] = [
   {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { ModeToggle } from '@/components/mode-toggle';
 import logo from '/logo.png';

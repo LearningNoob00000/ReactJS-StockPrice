@@ -32,7 +32,6 @@ export const OptionStocksCrypto = [
   { value: "T", label: "AT&T Inc. (T)" },
   { value: "TSLA", label: "Tesla Inc. (TSLA)" },
   { value: "TSM", label: "Taiwan Semiconductor Manufacturing Company (TSM)" },
-  { value: "UNH", label: "UnitedHealth Group Inc. (UNH)" },
   { value: "V", label: "Visa Inc. (V)" },
   { value: "WMT", label: "Walmart Inc. (WMT)" },
   { value: "XOM", label: "Exxon Mobil Corp. (XOM)" },

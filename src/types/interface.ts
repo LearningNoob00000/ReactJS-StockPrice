@@ -28,13 +28,11 @@ export interface StockProfileData {
 symbol: string;
   name: string;
   exchange: string;
-  mic_code: string;
   sector: string;
   industry: string;
   employees: number;
   website: string;
   description: string;
-  type: string;
   CEO: string;
   address: string;
   address2?: string;
@@ -43,4 +41,16 @@ symbol: string;
   state: string;
   country: string;
   phone: string;
+}
+export interface StatCardProps {
+  title: string;
+  value: string;
+  icon: JSX.Element;
+  subValue: string;
+  animate: boolean;
+}
+export interface NewsItem {
+  title: string;
+  value: string;
+  subValue: string;
 }

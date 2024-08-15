@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { TradingLoader } from '@/assets/loader/SimpleLoader';
 import { TextEffect } from '@/components/ui/text-effect';
 import AnimatedBackground from '@/components/ui/AnimatedBackground';
 import { SpinnerLoader } from '@/assets/loader/SpinnderLoader';
